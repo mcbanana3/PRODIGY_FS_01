@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -12,25 +10,25 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-// app.use(cors());
-app.use(cors({
-     origin: 'https://prodigy-fs-01-ei4ljyxjd-aryan-yalavarthis-projects.vercel.app/' // Change this to your client's URL
-}));
 
+// Define allowed origins
 const allowedOrigins = [
-    'https://prodigy-fs-01-ei4ljyxjd-aryan-yalavarthis-projects.vercel.app/',
-  ];
-  
-  app.use(cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
+    'https://prodigy-fs-01-ei4ljyxjd-aryan-yalavarthis-projects.vercel.app'
+];
+
+// CORS middleware configuration
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
     }
-  }));
-  
+};
+
+app.use(cors(corsOptions));
+
 // Routes
 app.use('/api/auth', authRoutes); // Ensure authRoutes are correctly imported
 
@@ -41,6 +39,6 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
             console.log(`Server running on port ${process.env.PORT}`);
         });
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 
 module.exports = app; // Export app for use in other files
