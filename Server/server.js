@@ -14,11 +14,11 @@ const app = express();
 app.use(express.json());
 // app.use(cors());
 app.use(cors({
-     origin: 'http://localhost:5173' // Change this to your client's URL
+     origin: 'https://prodigy-fs-01-ei4ljyxjd-aryan-yalavarthis-projects.vercel.app/' // Change this to your client's URL
 }));
 
 const allowedOrigins = [
-    'http://localhost:5173',
+    'https://prodigy-fs-01-ei4ljyxjd-aryan-yalavarthis-projects.vercel.app/',
   ];
   
   app.use(cors({
