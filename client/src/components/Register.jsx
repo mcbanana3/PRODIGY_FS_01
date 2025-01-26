@@ -12,12 +12,15 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
-        username,
-        email,
-        password,
-        role,
-      });
+      const res = await axios.post(
+        "https://prodigy-fs-01-aryanyalavarthi.onrender.com/api/auth/register",
+        {
+          username,
+          email,
+          password,
+          role,
+        }
+      );
       console.log(res.data);
     } catch (error) {
       if (error.response && error.response.data) {

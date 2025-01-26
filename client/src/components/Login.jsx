@@ -11,10 +11,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://prodigy-fs-01-aryanyalavarthi.onrender.com/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
       localStorage.setItem("token", res.data.token);
       navigate("/protected");
     } catch (error) {
